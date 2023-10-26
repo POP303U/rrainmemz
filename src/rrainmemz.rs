@@ -149,27 +149,27 @@ mod tests {
 
     #[test]
     fn test_wrapmemory() {
-        let program = String::from("<-.>---.+-.>-.");
+        let program = String::from("ligma npc ligma npc npc sigma npc ");
         let mut rrainmemz = Rrainmemz::new(program);
         assert_eq!(rrainmemz.run(), Ok(String::from("ÿýýÿ")))
     }
 
     #[test]
     fn test_wraparound() {
-        let program = String::from("-.>>-.<<.");
+        let program = String::from("");
         let mut rrainmemz = Rrainmemz::new(program);
         assert_eq!(rrainmemz.run(), Ok(String::from("ÿÿÿ")));
     }
     #[test]
     fn test_invalid_character() {
-        let program = String::from("nothing lol");
+        let program = String::from("");
         let mut rrainmemz = Rrainmemz::new(program);
         assert_eq!(rrainmemz.run(), Ok(String::new()));
     }
 
     #[test]
     fn test_loop() {
-        let program = String::from("[[-.+]]++[-]-.");
+        let program = String::from("");
         let mut rrainmemz = Rrainmemz::new(program);
         assert_eq!(rrainmemz.run(), Ok(String::from("ÿ")));
     }
