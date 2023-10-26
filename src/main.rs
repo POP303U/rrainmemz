@@ -29,14 +29,14 @@ fn convert_bf_to_rrz(file_contents: &String) {
     let mut parsed_code = Vec::new();
     for i in 0..code.len() {
         match code[i] {
-            b'+' => parsed_code.push(String::from("sigma ")),
-            b'-' => parsed_code.push(String::from("ligma ")),
-            b'>' => parsed_code.push(String::from("sideeye ")),
-            b'<' => parsed_code.push(String::from("amogus ")),
-            b'.' => parsed_code.push(String::from("npc ")),
-            b',' => parsed_code.push(String::from("goofy ")),
-            b'[' => parsed_code.push(String::from("skedaadle ")),
-            b']' => parsed_code.push(String::from("skedoodle ")),
+            b'+' => parsed_code.push(String::from("sigma,")),
+            b'-' => parsed_code.push(String::from("ligma,")),
+            b'>' => parsed_code.push(String::from("sideeye,")),
+            b'<' => parsed_code.push(String::from("amogus,")),
+            b'.' => parsed_code.push(String::from("npc,")),
+            b',' => parsed_code.push(String::from("goofy,")),
+            b'[' => parsed_code.push(String::from("skedaadle,")),
+            b']' => parsed_code.push(String::from("skedoodle,")),
             _ => {}
         }
     }
