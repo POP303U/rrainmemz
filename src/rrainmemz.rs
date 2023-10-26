@@ -85,10 +85,7 @@ impl Rrainmemz {
                 "goofy" => parsed_code.push(TokenType::Input),
                 "skedaadle" => parsed_code.push(TokenType::LeftParen),
                 "skedoodle" => parsed_code.push(TokenType::RightParen),
-                _ => {
-                    eprintln!("Invalid token at: {}", code[i]);
-                    std::process::exit(1);
-                }
+                _ => {}
             }
         }
         parsed_code
