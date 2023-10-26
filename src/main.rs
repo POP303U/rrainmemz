@@ -1,5 +1,4 @@
 mod rrainmemz;
-
 use {rrainmemz::Rrainmemz, std::env, std::fs, std::io};
 
 fn main() -> io::Result<()> {
@@ -13,8 +12,12 @@ fn main() -> io::Result<()> {
     let file_path = &args[1];
     let file_content = fs::read_to_string(file_path)?;
 
+    /*
+     * -- Run this to translate the current brainfuck file to rrainmemz
+        convert_bf_to_rrz(&file_content);
+    */
+
     // Run The Code :)
-    //convert_bf_to_rrz(&file_content); // run this on a file if you want to convert it to this garbage
     let _ = Rrainmemz::new(file_content).run();
 
     Ok(())
