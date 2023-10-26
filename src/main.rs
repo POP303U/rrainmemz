@@ -23,6 +23,7 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 
+#[allow(dead_code)]
 fn convert_bf_to_rrz(file_contents: &String) {
     let code: Vec<u8> = file_contents.bytes().collect();
     let mut parsed_code = Vec::new();
