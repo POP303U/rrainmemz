@@ -14,8 +14,8 @@ fn main() -> io::Result<()> {
     let file_content = fs::read_to_string(file_path)?;
 
     // Run The Code :)
-    convert_bf_to_rrz(&file_content);
-    //let _ = Rrainmemz::new(file_content).run();
+    //convert_bf_to_rrz(&file_content); // run this on a file if you want to convert it to this garbage
+    let _ = Rrainmemz::new(file_content).run();
 
     Ok(())
 }
