@@ -20,7 +20,7 @@ pub struct Rrainmemz {
 
 impl Rrainmemz {
     pub fn new(code: String) -> Rrainmemz {
-        let code: Vec<TokenType> = Self::parse_code(code.as_bytes().to_vec());
+        let code: Vec<TokenType> = Self::parse_code(code);
         Rrainmemz {
             code,
             pointer: 0,
@@ -72,19 +72,23 @@ impl Rrainmemz {
         }
     }
 
-    pub fn parse_code(code: Vec<u8>) -> Vec<TokenType> {
+    pub fn parse_code(code: String) -> Vec<TokenType> {
+        let code: Vec<&str> = code.split_whitespace().collect();
         let mut parsed_code = Vec::new();
         for i in 0..code.len() {
             match code[i] {
-                b'+' => parsed_code.push(TokenType::Plus),
-                b'-' => parsed_code.push(TokenType::Minus),
-                b'>' => parsed_code.push(TokenType::PointerRight),
-                b'<' => parsed_code.push(TokenType::PointerLeft),
-                b'.' => parsed_code.push(TokenType::Output),
-                b',' => parsed_code.push(TokenType::Input),
-                b'[' => parsed_code.push(TokenType::LeftParen),
-                b']' => parsed_code.push(TokenType::RightParen),
-                _ => {}
+                "sigma" => parsed_code.push(TokenType::Plus),
+                "ligma" => parsed_code.push(TokenType::Minus),
+                "sideeye" => parsed_code.push(TokenType::PointerRight),
+                "amogus" => parsed_code.push(TokenType::PointerLeft),
+                "npc" => parsed_code.push(TokenType::Output),
+                "goofy" => parsed_code.push(TokenType::Input),
+                "skedaadle" => parsed_code.push(TokenType::LeftParen),
+                "skedoodle" => parsed_code.push(TokenType::RightParen),
+                _ => {
+                    eprintln!("Invalid token at: {}", code[i]);
+                    std::process::exit(1);
+                }
             }
         }
         parsed_code

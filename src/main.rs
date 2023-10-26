@@ -13,7 +13,7 @@ fn main() -> io::Result<()> {
     let file_content = fs::read_to_string(file_path)?;
 
     // Run The Code :)
-    Rrainmemz::new(file_content).run();
+    let _ = Rrainmemz::new(file_content).run();
 
     Ok(())
 }
