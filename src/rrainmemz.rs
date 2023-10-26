@@ -73,10 +73,10 @@ impl Rrainmemz {
     }
 
     pub fn parse_code(code: String) -> Vec<TokenType> {
-        let code: Vec<&str> = code.split_whitespace().collect();
+        let code: Vec<&str> = code.split(',').collect();
         let mut parsed_code = Vec::new();
         for i in 0..code.len() {
-            match code[i] {
+            match code[i].trim() {
                 "sigma" => parsed_code.push(TokenType::Plus),
                 "ligma" => parsed_code.push(TokenType::Minus),
                 "sideeye" => parsed_code.push(TokenType::PointerRight),
