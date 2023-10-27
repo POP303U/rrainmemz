@@ -1,6 +1,6 @@
 use std::io;
 
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Clone, Copy, Debug)]
 pub enum TokenType {
     Plus,
     Minus,
@@ -20,9 +20,8 @@ pub struct Rrainmemz {
 
 impl Rrainmemz {
     pub fn new(code: String) -> Rrainmemz {
-        let code: Vec<TokenType> = Self::parse_code(code);
         Rrainmemz {
-            code,
+            code: Self::parse_code(code),
             pointer: 0,
             memory: vec![0; 30000],
         }
