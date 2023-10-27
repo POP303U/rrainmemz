@@ -14,8 +14,8 @@ fn main() -> io::Result<()> {
 
     /*
      * -- Run this to translate the current brainfuck file to rrainmemz
-        convert_bf_to_rrz(&file_content);
-    */
+     */
+    //convert_bf_to_rrz(&file_content);
 
     // Run The Code :)
     let _ = Rrainmemz::new(file_content).run();
