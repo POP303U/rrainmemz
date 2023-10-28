@@ -12,9 +12,6 @@ fn main() -> io::Result<()> {
     let file_path = &args[1];
     let file_content = fs::read_to_string(file_path)?;
 
-    /*
-     * -- Run this to translate the current brainfuck file to rrainmemz
-     */
     //convert_bf_to_rrz(&file_content);
 
     // Run The Code :)
