@@ -147,29 +147,29 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_wrapmemory() {
-        let program = String::from("ligma npc ligma npc npc sigma npc ");
+    fn test_wrapmemory_8bit() {
+        let program = String::from("ligma, npc, sigma, sigma, npc");
         let mut rrainmemz = Rrainmemz::new(program);
-        assert_eq!(rrainmemz.run(), Ok(String::from("ÿýýÿ")))
+        assert_eq!(rrainmemz.run(), Ok(String::from("ÿ\u{1}")))
     }
 
     #[test]
-    fn test_wraparound() {
-        let program = String::from("");
+    fn test_wraparound_cells() {
+        let program = String::from("amogus, amogus, sideeye, sideeye, sideeye");
         let mut rrainmemz = Rrainmemz::new(program);
-        assert_eq!(rrainmemz.run(), Ok(String::from("ÿÿÿ")));
+        assert_eq!(rrainmemz.run(), Ok(String::from("")));
     }
     #[test]
-    fn test_invalid_character() {
-        let program = String::from("");
+    fn test_invalid_tokens() {
+        let program = String::from("nothing lols");
         let mut rrainmemz = Rrainmemz::new(program);
         assert_eq!(rrainmemz.run(), Ok(String::new()));
     }
 
     #[test]
     fn test_loop() {
-        let program = String::from("");
+        let program = String::from("sigma, skedaadle, sigma, skedoodle");
         let mut rrainmemz = Rrainmemz::new(program);
-        assert_eq!(rrainmemz.run(), Ok(String::from("ÿ")));
+        assert_eq!(rrainmemz.run(), Ok(String::from("")));
     }
 }

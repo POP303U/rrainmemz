@@ -15,7 +15,7 @@ fn main() -> io::Result<()> {
     //convert_bf_to_rrz(&file_content);
 
     // Run The Code :)
-    let _ = Rrainmemz::new(file_content).run();
+    let _output = Rrainmemz::new(file_content).run();
 
     Ok(())
 }
