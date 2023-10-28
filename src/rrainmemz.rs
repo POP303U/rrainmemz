@@ -1,4 +1,4 @@
-use std::io;
+use std::io::*;
 
 #[derive(PartialEq, Clone, Copy, Debug)]
 pub enum TokenType {
@@ -15,7 +15,7 @@ pub enum TokenType {
 pub struct Rrainmemz {
     code: Vec<TokenType>,
     memory: Vec<u8>,
-    pointer: i32,
+    pointer: usize,
 }
 
 impl Rrainmemz {
@@ -28,32 +28,30 @@ impl Rrainmemz {
     }
 
     fn plus(&mut self) {
-        if self.memory[self.pointer as usize] == 255 {
-            self.memory[self.pointer as usize] = 0;
-        } else {
-            self.memory[self.pointer as usize] += 1;
+        match self.memory[self.pointer] {
+            255 => self.memory[self.pointer] = 0,
+            _ => self.memory[self.pointer] += 1,
         }
     }
 
     fn minus(&mut self) {
-        if self.memory[self.pointer as usize] == 0 {
-            self.memory[self.pointer as usize] = 255;
-        } else {
-            self.memory[self.pointer as usize] -= 1;
+        match self.memory[self.pointer] {
+            0 => self.memory[self.pointer] = 255,
+            _ => self.memory[self.pointer] -= 1,
         }
     }
 
     fn input(&mut self) {
-        let mut input = String::new();
-        io::stdin()
-            .read_line(&mut input)
+        let mut buffer = [0];
+        stdin()
+            .read_exact(&mut buffer)
             .expect("ERROR: Failed to read input");
-        self.memory[self.pointer as usize] = input.as_bytes()[0];
+        self.memory[self.pointer] = buffer[0];
     }
 
     fn output(&mut self) -> String {
-        print!("{}", self.memory[self.pointer as usize] as u8 as char);
-        (self.memory[self.pointer as usize] as char).to_string()
+        print!("{}", self.memory[self.pointer] as u8 as char);
+        (self.memory[self.pointer] as char).to_string()
     }
 
     fn move_right(&mut self) {
@@ -90,7 +88,7 @@ impl Rrainmemz {
         parsed_code
     }
 
-    pub fn run(&mut self) -> Result<String, String> {
+    pub fn run(&mut self) -> String {
         let mut i = 0;
         let mut output = String::new();
         while i < self.code.len() {
@@ -102,7 +100,7 @@ impl Rrainmemz {
                 TokenType::Output => output += &self.output(),
                 TokenType::Input => self.input(),
                 TokenType::LeftParen => {
-                    if self.memory[self.pointer as usize] == 0 {
+                    if self.memory[self.pointer] == 0 {
                         let mut layers = 0;
                         loop {
                             if self.code[i] == TokenType::RightParen {
@@ -119,7 +117,7 @@ impl Rrainmemz {
                     }
                 }
                 TokenType::RightParen => {
-                    if self.memory[self.pointer as usize] != 0 {
+                    if self.memory[self.pointer] != 0 {
                         let mut layers = 0;
                         loop {
                             if self.code[i] == TokenType::LeftParen {
@@ -138,7 +136,7 @@ impl Rrainmemz {
             }
             i += 1;
         }
-        Ok(output)
+        output
     }
 }
 
@@ -150,26 +148,26 @@ mod tests {
     fn test_wrapmemory_8bit() {
         let program = String::from("ligma, npc, sigma, sigma, npc");
         let mut rrainmemz = Rrainmemz::new(program);
-        assert_eq!(rrainmemz.run(), Ok(String::from("ÿ\u{1}")))
+        assert_eq!(rrainmemz.run(), String::from("ÿ\u{1}"))
     }
 
     #[test]
     fn test_wraparound_cells() {
         let program = String::from("amogus, amogus, sideeye, sideeye, sideeye");
         let mut rrainmemz = Rrainmemz::new(program);
-        assert_eq!(rrainmemz.run(), Ok(String::from("")));
+        assert_eq!(rrainmemz.run(), String::from(""));
     }
     #[test]
     fn test_invalid_tokens() {
         let program = String::from("nothing lols");
         let mut rrainmemz = Rrainmemz::new(program);
-        assert_eq!(rrainmemz.run(), Ok(String::new()));
+        assert_eq!(rrainmemz.run(), String::from(""));
     }
 
     #[test]
     fn test_loop() {
         let program = String::from("sigma, skedaadle, sigma, skedoodle");
         let mut rrainmemz = Rrainmemz::new(program);
-        assert_eq!(rrainmemz.run(), Ok(String::from("")));
+        assert_eq!(rrainmemz.run(), String::from(""));
     }
 }
